@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="660" height="540" viewBox="0 0 660 540"
+     xmlns="http://www.w3.org/2000/svg"
+     font-family="Arial, sans-serif">
+
+  <defs>
+    <!-- Mortar diagonal hatching (45°) -->
+    <pattern id="hatch-mortar" width="7" height="7" patternUnits="userSpaceOnUse"
+             patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#999" stroke-width="0.8"/>
+    </pattern>
+
+    <!-- Concrete cross-hatching (X pattern) -->
+    <pattern id="hatch-concrete" width="10" height="10" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="10" y2="10" stroke="#888" stroke-width="0.7"/>
+      <line x1="10" y1="0" x2="0"  y2="10" stroke="#888" stroke-width="0.7"/>
+    </pattern>
+
+    <!-- Self-leveling fine hatching (135°) -->
+    <pattern id="hatch-slev" width="5" height="5" patternUnits="userSpaceOnUse"
+             patternTransform="rotate(135)">
+      <line x1="0" y1="0" x2="0" y2="5" stroke="#bbb" stroke-width="0.6"/>
+    </pattern>
+  </defs>
+
+  <!-- White background -->
+  <rect width="660" height="540" fill="white"/>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION DRAWING
+       Drawing area: x=150 ~ x=430  (280px wide)
+       FL±0 baseline: y=80
+       Layer stack:
+         Carpet tile (9mm → 18px): y=80~98
+         Bond (2mm → 4px):         y=98~102
+         Selfleveling (5mm →10px): y=102~112
+         Mortar 84mm (168px):      y=112~280
+         Existing slab (70px):     y=280~350
+  ═══════════════════════════════════════════════ -->
+
+  <!-- FL±0 marker: filled inverted triangle -->
+  <polygon points="288,80 280,66 296,66" fill="#111"/>
+  <text x="300" y="74" font-size="11" font-weight="bold" fill="#111">FL±0</text>
+
+  <!-- ── CARPET TILE LAYER (y=80~98) ── -->
+  <rect x="150" y="80" width="280" height="18" fill="#d8d8d8"/>
+  <line x1="150" y1="80"  x2="430" y1="80"  x2="430" y2="80"
+        stroke="#111" stroke-width="1.8"/>
+  <line x1="150" y1="80"  x2="430" y2="80"  stroke="#111" stroke-width="1.8"/>
+  <line x1="150" y1="98"  x2="430" y2="98"  stroke="#555" stroke-width="0.7"/>
+
+  <!-- ── BOND LAYER (y=98~102) ── -->
+  <rect x="150" y="98" width="280" height="4" fill="#aaa"/>
+  <line x1="150" y1="102" x2="430" y2="102" stroke="#555" stroke-width="0.7"/>
+
+  <!-- ── SELFLEVELING LAYER (y=102~112) ── -->
+  <rect x="150" y="102" width="280" height="10" fill="url(#hatch-slev)"/>
+  <line x1="150" y1="112" x2="430" y2="112" stroke="#444" stroke-width="1"/>
+
+  <!-- ── MORTAR WITH WIRE MESH (y=112~280) ── -->
+  <rect x="150" y="112" width="280" height="168" fill="url(#hatch-mortar)"/>
+  <line x1="150" y1="280" x2="430" y2="280" stroke="#333" stroke-width="1.8"/>
+
+  <!-- Section left/right walls -->
+  <line x1="150" y1="80"  x2="150" y2="280" stroke="#111" stroke-width="1.2"/>
+  <line x1="430" y1="80"  x2="430" y2="280" stroke="#111" stroke-width="1.2"/>
+
+  <!-- ── EXISTING SLAB / CONCRETE (y=280~350) ── -->
+  <rect x="150" y="280" width="280" height="70" fill="url(#hatch-concrete)"/>
+  <line x1="150" y1="280" x2="150" y2="350" stroke="#333" stroke-width="1"/>
+  <line x1="430" y1="280" x2="430" y2="350" stroke="#333" stroke-width="1"/>
+
+  <!-- Wavy bottom edge of existing slab -->
+  <path d="M150,350
+           C165,348 175,353 190,350
+           C205,347 215,353 230,350
+           C245,347 255,353 270,350
+           C285,347 295,353 310,350
+           C325,347 335,353 350,350
+           C365,347 375,353 390,350
+           C405,347 415,353 430,350"
+        stroke="#444" stroke-width="1" fill="none"/>
+
+  <!-- Break marks (diagonal lines at bottom corners) -->
+  <line x1="150" y1="350" x2="128" y2="372" stroke="#444" stroke-width="0.9"/>
+  <line x1="140" y1="350" x2="118" y2="372" stroke="#444" stroke-width="0.9"/>
+  <line x1="430" y1="350" x2="452" y2="372" stroke="#444" stroke-width="0.9"/>
+  <line x1="440" y1="350" x2="462" y2="372" stroke="#444" stroke-width="0.9"/>
+
+  <!-- ═══════════════════════════════════════════════
+       DIMENSION LINES (left side)
+       Tick mark style: small 45° diagonal at each end
+  ═══════════════════════════════════════════════ -->
+
+  <!-- ── OUTER DIM: 100mm total (y=80~280), x=52 ── -->
+  <!-- Extension lines -->
+  <line x1="150" y1="80"  x2="44" y2="80"  stroke="#333" stroke-width="0.6"/>
+  <line x1="150" y1="280" x2="44" y2="280" stroke="#333" stroke-width="0.6"/>
+  <!-- Dim line -->
+  <line x1="50" y1="80" x2="50" y2="280" stroke="#333" stroke-width="0.8"/>
+  <!-- Tick marks -->
+  <line x1="44" y1="74"  x2="56" y2="86"  stroke="#333" stroke-width="1.6"/>
+  <line x1="44" y1="274" x2="56" y2="286" stroke="#333" stroke-width="1.6"/>
+  <!-- Number -->
+  <text transform="translate(43,182) rotate(-90)"
+        text-anchor="middle" font-size="11" fill="#333">100</text>
+
+  <!-- ── INNER DIM TOP: 16mm (y=80~112), x=75 ── -->
+  <line x1="150" y1="80"  x2="68" y2="80"  stroke="#333" stroke-width="0.6"/>
+  <line x1="150" y1="112" x2="68" y2="112" stroke="#333" stroke-width="0.6"/>
+  <line x1="74" y1="80" x2="74" y2="112" stroke="#333" stroke-width="0.8"/>
+  <line x1="68" y1="74"  x2="80" y2="86"  stroke="#333" stroke-width="1.6"/>
+  <line x1="68" y1="106" x2="80" y2="118" stroke="#333" stroke-width="1.6"/>
+  <text transform="translate(67,97) rotate(-90)"
+        text-anchor="middle" font-size="10" fill="#333">16</text>
+
+  <!-- ── INNER DIM MORTAR: 84mm (y=112~280), x=75 ── -->
+  <line x1="150" y1="112" x2="68" y2="112" stroke="#333" stroke-width="0.6"/>
+  <line x1="150" y1="280" x2="68" y2="280" stroke="#333" stroke-width="0.6"/>
+  <line x1="74" y1="112" x2="74" y2="280" stroke="#333" stroke-width="0.8"/>
+  <line x1="68" y1="106" x2="80" y2="118" stroke="#333" stroke-width="1.6"/>
+  <line x1="68" y1="274" x2="80" y2="286" stroke="#333" stroke-width="1.6"/>
+  <text transform="translate(67,198) rotate(-90)"
+        text-anchor="middle" font-size="10" fill="#333">84</text>
+
+  <!-- ═══════════════════════════════════════════════
+       LEADER LINE ANNOTATIONS (right side)
+       Horizontal lines from layer edge → text
+  ═══════════════════════════════════════════════ -->
+
+  <!-- APP' CARPET TILE FIN. -->
+  <line x1="430" y1="89"  x2="452" y2="89"  stroke="#333" stroke-width="0.7"/>
+  <text x="456" y="93"  font-size="10.5" fill="#111">— APP' CARPET TILE FIN.</text>
+
+  <!-- BOND -->
+  <line x1="430" y1="100" x2="452" y2="100" stroke="#333" stroke-width="0.7"/>
+  <text x="456" y="104" font-size="10.5" fill="#111">— BOND</text>
+
+  <!-- THK. 5mm SELFLEVELING -->
+  <line x1="430" y1="107" x2="452" y2="107" stroke="#333" stroke-width="0.7"/>
+  <text x="456" y="111" font-size="10.5" fill="#111">— THK. 5mm SELFLEVELING</text>
+
+  <!-- MORTAR (WIRE MESH) -->
+  <line x1="430" y1="196" x2="452" y2="196" stroke="#333" stroke-width="0.7"/>
+  <text x="456" y="200" font-size="10.5" fill="#111">— MORTAR (WIRE MESH)</text>
+
+  <!-- ═══════════════════════════════════════════════
+       TITLE BLOCK  (PDF style bottom label)
+  ═══════════════════════════════════════════════ -->
+  <!-- Outer box -->
+  <rect x="110" y="400" width="320" height="60"
+        fill="none" stroke="#333" stroke-width="0.8"/>
+  <!-- Vertical dividers -->
+  <line x1="175" y1="400" x2="175" y2="460" stroke="#333" stroke-width="0.7"/>
+  <line x1="290" y1="400" x2="290" y2="460" stroke="#333" stroke-width="0.7"/>
+  <!-- Horizontal divider -->
+  <line x1="110" y1="430" x2="430" y2="430" stroke="#333" stroke-width="0.7"/>
+
+  <!-- Row 1 -->
+  <text x="142" y="419" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">F-001</text>
+  <text x="232" y="419" text-anchor="middle" font-size="10" fill="#333">FINISH</text>
+  <text x="362" y="419" text-anchor="middle" font-size="10" fill="#333">CARPET TILE</text>
+
+  <!-- Row 2 -->
+  <text x="142" y="449" text-anchor="middle" font-size="10" fill="#777">FD-001</text>
+  <text x="232" y="449" text-anchor="middle" font-size="10" fill="#333">DISCRIPTION</text>
+  <text x="362" y="449" text-anchor="middle" font-size="9" fill="#777">—</text>
+
+  <!-- ═══════════════════════════════════════════════
+       OUTER BORDER
+  ═══════════════════════════════════════════════ -->
+  <rect x="8" y="8" width="644" height="524"
+        fill="none" stroke="#555" stroke-width="0.8"/>
+
+  <!-- Drawing title top -->
+  <text x="330" y="34" text-anchor="middle" font-size="12" font-weight="bold" fill="#111">
+    바닥상세도 -1 / FLOOR DETAIL -1
+  </text>
+  <text x="330" y="50" text-anchor="middle" font-size="9" fill="#777">
+    SCALE : A3:1/10    DATE : 2025. 04.    DRAWING NO. : FD-001    SHEET NO. : 002
+  </text>
+  <line x1="8" y1="56" x2="652" y2="56" stroke="#555" stroke-width="0.7"/>
+
+</svg>
