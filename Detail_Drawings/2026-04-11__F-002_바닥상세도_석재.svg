@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="660" height="540" viewBox="0 0 660 540"
+     xmlns="http://www.w3.org/2000/svg"
+     font-family="Arial, sans-serif">
+
+  <defs>
+    <!-- Stone fine stipple (light) -->
+    <pattern id="hatch-stone" width="6" height="6" patternUnits="userSpaceOnUse">
+      <rect width="6" height="6" fill="#f4f0eb"/>
+      <circle cx="1" cy="1" r="0.4" fill="#c0b8a8"/>
+      <circle cx="4" cy="4" r="0.4" fill="#c0b8a8"/>
+    </pattern>
+
+    <!-- Mortar stipple (medium) -->
+    <pattern id="hatch-mortar" width="5" height="5" patternUnits="userSpaceOnUse">
+      <rect width="5" height="5" fill="#e8e2d8"/>
+      <circle cx="0.8" cy="0.8" r="0.5" fill="#a09080"/>
+      <circle cx="3.3" cy="3.3" r="0.5" fill="#a09080"/>
+      <circle cx="0.8" cy="3.3" r="0.35" fill="#b0a890"/>
+      <circle cx="3.3" cy="0.8" r="0.35" fill="#b0a890"/>
+    </pattern>
+
+    <!-- Arrowhead marker -->
+    <marker id="arrow" markerWidth="6" markerHeight="6"
+            refX="3" refY="3" orient="auto">
+      <path d="M6,1 L6,5 L2,3 Z" fill="#333"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect width="660" height="540" fill="white"/>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION DRAWING
+       Scale: 2px = 1mm
+       FL±0 baseline: y=80
+       Stone (20mm → 40px):   y=80~120
+       Mortar (80mm → 160px): y=120~280
+       Existing slab:         y=280~350
+  ═══════════════════════════════════════════════ -->
+
+  <!-- FL±0 marker -->
+  <polygon points="288,80 280,66 296,66" fill="#111"/>
+  <text x="300" y="74" font-size="11" font-weight="bold" fill="#111">FL±0</text>
+
+  <!-- ── STONE LAYER (y=80~120) ── -->
+  <rect x="150" y="80" width="280" height="40" fill="url(#hatch-stone)"/>
+  <line x1="150" y1="80"  x2="430" y2="80"  stroke="#111" stroke-width="1.8"/>
+  <line x1="150" y1="120" x2="430" y2="120" stroke="#555" stroke-width="1"/>
+
+  <!-- ── MORTAR WITH WIRE MESH (y=120~280) ── -->
+  <rect x="150" y="120" width="280" height="160" fill="url(#hatch-mortar)"/>
+  <line x1="150" y1="280" x2="430" y2="280" stroke="#111" stroke-width="1.8"/>
+
+  <!-- Section left/right walls -->
+  <line x1="150" y1="80"  x2="150" y2="280" stroke="#111" stroke-width="1.2"/>
+  <line x1="430" y1="80"  x2="430" y2="280" stroke="#111" stroke-width="1.2"/>
+
+  <!-- ── EXISTING SLAB (y=280~350) ── -->
+  <rect x="150" y="280" width="280" height="70" fill="#888"/>
+  <line x1="150" y1="280" x2="150" y2="350" stroke="#333" stroke-width="1"/>
+  <line x1="430" y1="280" x2="430" y2="350" stroke="#333" stroke-width="1"/>
+
+  <!-- Wavy bottom edge -->
+  <path d="M150,350
+           C165,348 175,353 190,350
+           C205,347 215,353 230,350
+           C245,347 255,353 270,350
+           C285,347 295,353 310,350
+           C325,347 335,353 350,350
+           C365,347 375,353 390,350
+           C405,347 415,353 430,350"
+        stroke="#555" stroke-width="1" fill="none"/>
+
+  <!-- Break marks -->
+  <line x1="150" y1="350" x2="128" y2="372" stroke="#444" stroke-width="0.9"/>
+  <line x1="140" y1="350" x2="118" y2="372" stroke="#444" stroke-width="0.9"/>
+  <line x1="430" y1="350" x2="452" y2="372" stroke="#444" stroke-width="0.9"/>
+  <line x1="440" y1="350" x2="462" y2="372" stroke="#444" stroke-width="0.9"/>
+
+  <!-- ═══════════════════════════════════════════════
+       DIMENSION LINES (left side)
+  ═══════════════════════════════════════════════ -->
+
+  <!-- ── OUTER DIM: 100mm (y=80~280), x=52 ── -->
+  <line x1="150" y1="80"  x2="44" y2="80"  stroke="#333" stroke-width="0.6"/>
+  <line x1="150" y1="280" x2="44" y2="280" stroke="#333" stroke-width="0.6"/>
+  <line x1="50" y1="80"   x2="50" y2="280" stroke="#333" stroke-width="0.8"/>
+  <line x1="44" y1="74"   x2="56" y2="86"  stroke="#333" stroke-width="1.6"/>
+  <line x1="44" y1="274"  x2="56" y2="286" stroke="#333" stroke-width="1.6"/>
+  <text transform="translate(43,182) rotate(-90)"
+        text-anchor="middle" font-size="11" fill="#333">100</text>
+
+  <!-- ── INNER DIM TOP: 20mm (y=80~120), x=75 ── -->
+  <line x1="150" y1="80"  x2="68" y2="80"  stroke="#333" stroke-width="0.6"/>
+  <line x1="150" y1="120" x2="68" y2="120" stroke="#333" stroke-width="0.6"/>
+  <line x1="74" y1="80"   x2="74" y2="120" stroke="#333" stroke-width="0.8"/>
+  <line x1="68" y1="74"   x2="80" y2="86"  stroke="#333" stroke-width="1.6"/>
+  <line x1="68" y1="114"  x2="80" y2="126" stroke="#333" stroke-width="1.6"/>
+  <text transform="translate(67,101) rotate(-90)"
+        text-anchor="middle" font-size="10" fill="#333">20</text>
+
+  <!-- ── INNER DIM MORTAR: 80mm (y=120~280), x=75 ── -->
+  <line x1="150" y1="120" x2="68" y2="120" stroke="#333" stroke-width="0.6"/>
+  <line x1="150" y1="280" x2="68" y2="280" stroke="#333" stroke-width="0.6"/>
+  <line x1="74" y1="120"  x2="74" y2="280" stroke="#333" stroke-width="0.8"/>
+  <line x1="68" y1="114"  x2="80" y2="126" stroke="#333" stroke-width="1.6"/>
+  <line x1="68" y1="274"  x2="80" y2="286" stroke="#333" stroke-width="1.6"/>
+  <text transform="translate(67,202) rotate(-90)"
+        text-anchor="middle" font-size="10" fill="#333">80</text>
+
+  <!-- ═══════════════════════════════════════════════
+       LEADER LINE (diagonal, pointing into section)
+       Origin: inside stone layer at section edge
+       End: text area upper-right
+  ═══════════════════════════════════════════════ -->
+
+  <!-- Main diagonal leader line -->
+  <line x1="430" y1="105" x2="510" y2="248"
+        stroke="#333" stroke-width="0.7"
+        marker-start="none"/>
+
+  <!-- Arrowhead at origin (pointing into stone layer) -->
+  <polygon points="430,105 436,95 440,108" fill="#333"/>
+
+  <!-- Horizontal text leaders -->
+  <line x1="510" y1="248" x2="510" y2="263" stroke="#333" stroke-width="0.7"/>
+
+  <!-- APP' STONE FIN. -->
+  <line x1="510" y1="248" x2="530" y2="248" stroke="#333" stroke-width="0.7"/>
+  <text x="534" y="252" font-size="10.5" fill="#111">APP' STONE FIN.</text>
+
+  <!-- MORTAR (WIRE MESH) -->
+  <line x1="510" y1="263" x2="530" y2="263" stroke="#333" stroke-width="0.7"/>
+  <text x="534" y="267" font-size="10.5" fill="#111">MORTAR (WIRE MESH)</text>
+
+  <!-- ═══════════════════════════════════════════════
+       TITLE BLOCK
+  ═══════════════════════════════════════════════ -->
+  <rect x="110" y="400" width="320" height="60"
+        fill="none" stroke="#333" stroke-width="0.8"/>
+  <line x1="175" y1="400" x2="175" y2="460" stroke="#333" stroke-width="0.7"/>
+  <line x1="290" y1="400" x2="290" y2="460" stroke="#333" stroke-width="0.7"/>
+  <line x1="110" y1="430" x2="430" y2="430" stroke="#333" stroke-width="0.7"/>
+
+  <text x="142" y="419" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">F-002</text>
+  <text x="232" y="419" text-anchor="middle" font-size="10" fill="#333">FINISH</text>
+  <text x="362" y="419" text-anchor="middle" font-size="10" fill="#333">STONE</text>
+
+  <text x="142" y="449" text-anchor="middle" font-size="10" fill="#777">FD-002</text>
+  <text x="232" y="449" text-anchor="middle" font-size="10" fill="#333">DISCRIPTION</text>
+  <text x="362" y="449" text-anchor="middle" font-size="9" fill="#777">—</text>
+
+  <!-- ═══════════════════════════════════════════════
+       OUTER BORDER
+  ═══════════════════════════════════════════════ -->
+  <rect x="8" y="8" width="644" height="524"
+        fill="none" stroke="#555" stroke-width="0.8"/>
+
+  <text x="330" y="34" text-anchor="middle" font-size="12" font-weight="bold" fill="#111">
+    바닥상세도 -2 / FLOOR DETAIL -2
+  </text>
+  <text x="330" y="50" text-anchor="middle" font-size="9" fill="#777">
+    SCALE : A3:1/10    DATE : 2025. 04.    DRAWING NO. : FD-002    SHEET NO. : 003
+  </text>
+  <line x1="8" y1="56" x2="652" y2="56" stroke="#555" stroke-width="0.7"/>
+
+</svg>
