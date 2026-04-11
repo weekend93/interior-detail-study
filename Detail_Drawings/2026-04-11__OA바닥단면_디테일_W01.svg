@@ -1,345 +1,326 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="750" height="1050" viewBox="0 0 750 1050"
+<svg width="750" height="920" viewBox="0 0 750 920"
      xmlns="http://www.w3.org/2000/svg"
      font-family="'Courier New', Courier, monospace">
 
   <defs>
-    <!-- Hand-drawn wobble filter -->
-    <filter id="rough" x="-3%" y="-3%" width="106%" height="106%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise" seed="7"/>
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.6"
+    <!-- Hand-drawn wobble for structural elements -->
+    <filter id="rough" x="-4%" y="-4%" width="108%" height="108%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="4"
+                    result="noise" seed="9"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.8"
+                         xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <!-- Lighter wobble for annotations/dims -->
+    <filter id="rough-sm" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3"
+                    result="noise" seed="9"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.2"
                          xChannelSelector="R" yChannelSelector="G"/>
     </filter>
 
-    <!-- Graph paper: fine 10px grid -->
-    <pattern id="grid-fine" width="10" height="10" patternUnits="userSpaceOnUse">
-      <path d="M10 0L0 0 0 10" fill="none" stroke="#9ab4d0" stroke-width="0.3" opacity="0.55"/>
+    <!-- Graph paper fine -->
+    <pattern id="gf" width="10" height="10" patternUnits="userSpaceOnUse">
+      <path d="M10 0L0 0 0 10" fill="none" stroke="#9ab4d0" stroke-width="0.25" opacity="0.5"/>
     </pattern>
-
-    <!-- Graph paper: major 50px grid -->
-    <pattern id="grid-major" width="50" height="50" patternUnits="userSpaceOnUse">
-      <path d="M50 0L0 0 0 50" fill="none" stroke="#6080a8" stroke-width="0.65" opacity="0.45"/>
+    <!-- Graph paper major -->
+    <pattern id="gm" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M50 0L0 0 0 50" fill="none" stroke="#6080a8" stroke-width="0.6" opacity="0.4"/>
     </pattern>
-
-    <!-- Concrete diagonal hatching -->
-    <pattern id="hatch-rc" width="10" height="10" patternUnits="userSpaceOnUse"
+    <!-- Concrete hatching -->
+    <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse"
              patternTransform="rotate(45)">
-      <line x1="0" y1="0" x2="0" y2="10" stroke="#444" stroke-width="0.9" opacity="0.5"/>
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#555" stroke-width="1" opacity="0.45"/>
     </pattern>
-
-    <!-- Arrow marker: red -->
-    <marker id="arr-red" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-      <path d="M0,0 L6,3 L0,6 Z" fill="#cc0000"/>
-    </marker>
-    <marker id="arr-red-rev" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse">
-      <path d="M0,0 L6,3 L0,6 Z" fill="#cc0000"/>
-    </marker>
-    <marker id="arr-blue" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-      <path d="M0,0 L6,3 L0,6 Z" fill="#2244bb"/>
-    </marker>
-    <marker id="arr-blue-rev" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse">
-      <path d="M0,0 L6,3 L0,6 Z" fill="#2244bb"/>
-    </marker>
   </defs>
 
-  <!-- ── BACKGROUND ──────────────────────────────────────── -->
-  <rect width="750" height="1050" fill="#f9f7f1"/>
-  <rect width="750" height="1050" fill="url(#grid-fine)"/>
-  <rect width="750" height="1050" fill="url(#grid-major)"/>
+  <!-- BACKGROUND -->
+  <rect width="750" height="920" fill="#f9f7f1"/>
+  <rect width="750" height="920" fill="url(#gf)"/>
+  <rect width="750" height="920" fill="url(#gm)"/>
+  <rect x="22" y="22" width="706" height="876" fill="none"
+        stroke="#666" stroke-width="1.5" filter="url(#rough-sm)"/>
 
-  <!-- Outer border -->
-  <rect x="22" y="22" width="706" height="1006" fill="none"
-        stroke="#555" stroke-width="2" filter="url(#rough)"/>
-
-  <!-- ── TITLE HEADER ─────────────────────────────────────── -->
-  <rect x="22" y="22" width="706" height="58" fill="none"
-        stroke="#555" stroke-width="1.2" filter="url(#rough)"/>
-  <line x1="22" y1="22" x2="728" y2="22" stroke="#555" stroke-width="2.5"/>
-
-  <text x="375" y="50" text-anchor="middle" font-size="16" font-weight="bold" fill="#111">
+  <!-- TITLE -->
+  <text x="375" y="48" text-anchor="middle" font-size="14" font-weight="bold" fill="#111">
     OA 바닥 단면 디테일 / OA FLOOR SECTION DETAIL
   </text>
-  <text x="375" y="68" text-anchor="middle" font-size="9.5" fill="#555">
-    SCALE : N.T.S.    DATE : 2026.04.11    WEEK : W-01
+  <text x="375" y="62" text-anchor="middle" font-size="9" fill="#777">
+    SCALE : N.T.S.    DATE : 2026.04.11    SHEET : W-01
   </text>
+  <path d="M30,68 C250,67 500,69 720,68"
+        stroke="#888" stroke-width="0.9" fill="none" filter="url(#rough-sm)"/>
 
-  <!-- ── RC SLAB ───────────────────────────────────────────── -->
-  <!-- y=100 ~ y=222, representing THK 200mm RC slab -->
-  <rect x="90" y="100" width="560" height="122"
-        fill="url(#hatch-rc)" stroke="none" filter="url(#rough)"/>
-  <rect x="90" y="100" width="560" height="122"
-        fill="none" stroke="#111" stroke-width="2" filter="url(#rough)"/>
+  <!-- ══════════════════════ RC SLAB ══════════════════════ -->
+  <!-- y=88 ~ y=200  (representing THK 200mm) -->
+  <rect x="105" y="88" width="530" height="112" fill="url(#hatch)"/>
+  <!-- Top edge (break line — slab continues upward) -->
+  <path d="M105,88 C220,87 400,89 635,88"
+        stroke="#111" stroke-width="1.5" stroke-dasharray="8,5" fill="none" filter="url(#rough)"/>
+  <!-- Bottom edge of slab (strong line) -->
+  <path d="M105,200 C220,199 420,201 635,200"
+        stroke="#111" stroke-width="3" fill="none" filter="url(#rough)"/>
+  <!-- Left/right edges -->
+  <path d="M105,88 C104,130 105,170 105,200"
+        stroke="#111" stroke-width="2" fill="none" filter="url(#rough)"/>
+  <path d="M635,88 C634,130 635,170 635,200"
+        stroke="#111" stroke-width="2" fill="none" filter="url(#rough)"/>
+  <!-- Label -->
+  <text x="370" y="152" text-anchor="middle" font-size="13" fill="#444"
+        font-style="italic" letter-spacing="4">R.C SLAB</text>
 
-  <!-- Slab top cut line (structural break symbol) -->
-  <path d="M90,100 l-18,0 M650,100 l18,0" stroke="#888" stroke-width="1"
-        stroke-dasharray="6,4" filter="url(#rough)"/>
-
-  <!-- ── PEDESTAL LEFT ─────────────────────────────────────── -->
-  <!-- Base anchor plate: y=222 ~ y=240 -->
-  <rect x="168" y="222" width="64" height="16" fill="#dcdcdc"
-        stroke="#222" stroke-width="1.8" filter="url(#rough)"/>
+  <!-- ══════════════════════ PEDESTAL LEFT ══════════════════════ -->
+  <!-- Base plate y=200~218, centered at x=210 -->
+  <path d="M155,200 C175,199 245,200 265,200"
+        stroke="#222" stroke-width="3" fill="none" filter="url(#rough)"/>
+  <path d="M155,218 C175,217 245,218 265,218"
+        stroke="#222" stroke-width="1.8" fill="none" filter="url(#rough)"/>
+  <path d="M155,200 C155,207 155,214 155,218"
+        stroke="#222" stroke-width="1.8" fill="none" filter="url(#rough)"/>
+  <path d="M265,200 C265,207 265,214 265,218"
+        stroke="#222" stroke-width="1.8" fill="none" filter="url(#rough)"/>
   <!-- Anchor bolts -->
-  <circle cx="176" cy="230" r="4" fill="#555" filter="url(#rough)"/>
-  <circle cx="224" cy="230" r="4" fill="#555" filter="url(#rough)"/>
-  <!-- Leg outer tube -->
-  <rect x="192" y="238" width="16" height="112" fill="#ececec"
-        stroke="#222" stroke-width="1.8" filter="url(#rough)"/>
-  <!-- Leg inner (adjustable spindle) -->
-  <rect x="196" y="278" width="8" height="60" fill="#e2e2e2"
-        stroke="#555" stroke-width="1" filter="url(#rough)"/>
-  <!-- Thread rings -->
-  <ellipse cx="200" cy="293" rx="7" ry="4"
-           fill="none" stroke="#333" stroke-width="1" filter="url(#rough)"/>
-  <ellipse cx="200" cy="307" rx="7" ry="4"
-           fill="none" stroke="#333" stroke-width="1" filter="url(#rough)"/>
-  <ellipse cx="200" cy="321" rx="7" ry="4"
-           fill="none" stroke="#333" stroke-width="1" filter="url(#rough)"/>
+  <circle cx="168" cy="209" r="5" fill="#333" filter="url(#rough)"/>
+  <circle cx="252" cy="209" r="5" fill="#333" filter="url(#rough)"/>
+  <!-- Outer leg tube (left side) -->
+  <path d="M187,218 C187,300 188,410 188,492"
+        stroke="#222" stroke-width="2.8" fill="none" filter="url(#rough)"/>
+  <path d="M213,218 C213,300 214,410 214,492"
+        stroke="#222" stroke-width="2.8" fill="none" filter="url(#rough)"/>
+  <!-- Inner spindle -->
+  <path d="M193,295 C193,360 193,430 193,472"
+        stroke="#666" stroke-width="1.3" fill="none" filter="url(#rough)"/>
+  <path d="M207,295 C207,360 207,430 207,472"
+        stroke="#666" stroke-width="1.3" fill="none" filter="url(#rough)"/>
+  <!-- Thread rings (ellipses — hand-drawn) -->
+  <ellipse cx="200" cy="318" rx="9" ry="5" fill="none" stroke="#444" stroke-width="1.3" filter="url(#rough)"/>
+  <ellipse cx="200" cy="338" rx="9" ry="5" fill="none" stroke="#444" stroke-width="1.3" filter="url(#rough)"/>
+  <ellipse cx="200" cy="358" rx="9" ry="5" fill="none" stroke="#444" stroke-width="1.3" filter="url(#rough)"/>
+  <ellipse cx="200" cy="378" rx="9" ry="5" fill="none" stroke="#444" stroke-width="1.3" filter="url(#rough)"/>
+  <ellipse cx="200" cy="398" rx="9" ry="5" fill="none" stroke="#444" stroke-width="1.3" filter="url(#rough)"/>
+  <ellipse cx="200" cy="418" rx="9" ry="5" fill="none" stroke="#444" stroke-width="1.3" filter="url(#rough)"/>
+  <ellipse cx="200" cy="438" rx="9" ry="5" fill="none" stroke="#444" stroke-width="1.3" filter="url(#rough)"/>
+  <ellipse cx="200" cy="458" rx="9" ry="5" fill="none" stroke="#444" stroke-width="1.3" filter="url(#rough)"/>
   <!-- Top cap plate -->
-  <rect x="180" y="350" width="40" height="13" fill="#dcdcdc"
-        stroke="#222" stroke-width="1.8" filter="url(#rough)"/>
+  <path d="M172,492 C185,491 215,492 228,492"
+        stroke="#222" stroke-width="3" fill="none" filter="url(#rough)"/>
+  <path d="M172,506 C185,505 215,506 228,506"
+        stroke="#222" stroke-width="1.8" fill="none" filter="url(#rough)"/>
+  <path d="M172,492 C172,497 172,503 172,506"
+        stroke="#222" stroke-width="1.8" fill="none" filter="url(#rough)"/>
+  <path d="M228,492 C228,497 228,503 228,506"
+        stroke="#222" stroke-width="1.8" fill="none" filter="url(#rough)"/>
 
-  <!-- ── PEDESTAL RIGHT ────────────────────────────────────── -->
-  <rect x="468" y="222" width="64" height="16" fill="#dcdcdc"
-        stroke="#222" stroke-width="1.8" filter="url(#rough)"/>
-  <circle cx="476" cy="230" r="4" fill="#555" filter="url(#rough)"/>
-  <circle cx="524" cy="230" r="4" fill="#555" filter="url(#rough)"/>
-  <rect x="492" y="238" width="16" height="112" fill="#ececec"
-        stroke="#222" stroke-width="1.8" filter="url(#rough)"/>
-  <rect x="496" y="278" width="8" height="60" fill="#e2e2e2"
-        stroke="#555" stroke-width="1" filter="url(#rough)"/>
-  <ellipse cx="500" cy="293" rx="7" ry="4"
-           fill="none" stroke="#333" stroke-width="1" filter="url(#rough)"/>
-  <ellipse cx="500" cy="307" rx="7" ry="4"
-           fill="none" stroke="#333" stroke-width="1" filter="url(#rough)"/>
-  <ellipse cx="500" cy="321" rx="7" ry="4"
-           fill="none" stroke="#333" stroke-width="1" filter="url(#rough)"/>
-  <rect x="480" y="350" width="40" height="13" fill="#dcdcdc"
-        stroke="#222" stroke-width="1.8" filter="url(#rough)"/>
+  <!-- STEEL SECTION SYMBOL ⊠ at top of pedestal cap -->
+  <rect x="176" y="197" width="18" height="18" fill="none"
+        stroke="#222" stroke-width="1.5" filter="url(#rough)"/>
+  <line x1="176" y1="197" x2="194" y2="215" stroke="#222" stroke-width="1.2" filter="url(#rough)"/>
+  <line x1="194" y1="197" x2="176" y2="215" stroke="#222" stroke-width="1.2" filter="url(#rough)"/>
 
-  <!-- ── OA FLOOR PANEL ────────────────────────────────────── -->
-  <!-- Panel: y=363 ~ y=390 -->
-  <rect x="90" y="363" width="560" height="27" fill="#f3f2ed"
-        stroke="#111" stroke-width="2" filter="url(#rough)"/>
-  <!-- Panel divider (tile joint) -->
-  <line x1="360" y1="363" x2="360" y2="390" stroke="#bbb" stroke-width="1" filter="url(#rough)"/>
-  <line x1="90" y1="375" x2="650" y2="375" stroke="#bbb" stroke-width="0.5"
-        stroke-dasharray="8,5" filter="url(#rough)"/>
+  <!-- ══════════════════════ PEDESTAL RIGHT ══════════════════════ -->
+  <!-- centered at x=510 -->
+  <path d="M463,200 C483,199 537,200 557,200"
+        stroke="#222" stroke-width="3" fill="none" filter="url(#rough)"/>
+  <path d="M463,218 C483,217 537,218 557,218"
+        stroke="#222" stroke-width="1.8" fill="none" filter="url(#rough)"/>
+  <path d="M463,200 C463,207 463,214 463,218"
+        stroke="#222" stroke-width="1.8" fill="none" filter="url(#rough)"/>
+  <path d="M557,200 C557,207 557,214 557,218"
+        stroke="#222" stroke-width="1.8" fill="none" filter="url(#rough)"/>
+  <circle cx="476" cy="209" r="5" fill="#333" filter="url(#rough)"/>
+  <circle cx="544" cy="209" r="5" fill="#333" filter="url(#rough)"/>
+  <path d="M487,218 C487,300 488,410 488,492"
+        stroke="#222" stroke-width="2.8" fill="none" filter="url(#rough)"/>
+  <path d="M513,218 C513,300 514,410 514,492"
+        stroke="#222" stroke-width="2.8" fill="none" filter="url(#rough)"/>
+  <path d="M493,295 C493,360 493,430 493,472"
+        stroke="#666" stroke-width="1.3" fill="none" filter="url(#rough)"/>
+  <path d="M507,295 C507,360 507,430 507,472"
+        stroke="#666" stroke-width="1.3" fill="none" filter="url(#rough)"/>
+  <ellipse cx="500" cy="318" rx="9" ry="5" fill="none" stroke="#444" stroke-width="1.3" filter="url(#rough)"/>
+  <ellipse cx="500" cy="338" rx="9" ry="5" fill="none" stroke="#444" stroke-width="1.3" filter="url(#rough)"/>
+  <ellipse cx="500" cy="358" rx="9" ry="5" fill="none" stroke="#444" stroke-width="1.3" filter="url(#rough)"/>
+  <ellipse cx="500" cy="378" rx="9" ry="5" fill="none" stroke="#444" stroke-width="1.3" filter="url(#rough)"/>
+  <ellipse cx="500" cy="398" rx="9" ry="5" fill="none" stroke="#444" stroke-width="1.3" filter="url(#rough)"/>
+  <ellipse cx="500" cy="418" rx="9" ry="5" fill="none" stroke="#444" stroke-width="1.3" filter="url(#rough)"/>
+  <ellipse cx="500" cy="438" rx="9" ry="5" fill="none" stroke="#444" stroke-width="1.3" filter="url(#rough)"/>
+  <ellipse cx="500" cy="458" rx="9" ry="5" fill="none" stroke="#444" stroke-width="1.3" filter="url(#rough)"/>
+  <path d="M472,492 C485,491 515,492 528,492"
+        stroke="#222" stroke-width="3" fill="none" filter="url(#rough)"/>
+  <path d="M472,506 C485,505 515,506 528,506"
+        stroke="#222" stroke-width="1.8" fill="none" filter="url(#rough)"/>
+  <path d="M472,492 C472,497 472,503 472,506"
+        stroke="#222" stroke-width="1.8" fill="none" filter="url(#rough)"/>
+  <path d="M528,492 C528,497 528,503 528,506"
+        stroke="#222" stroke-width="1.8" fill="none" filter="url(#rough)"/>
 
-  <!-- ── BOND (2mm) ────────────────────────────────────────── -->
-  <rect x="90" y="390" width="560" height="4" fill="#bbbbbb"
-        stroke="#666" stroke-width="0.8" filter="url(#rough)"/>
+  <!-- STEEL SECTION SYMBOL ⊠ right pedestal top -->
+  <rect x="476" y="197" width="18" height="18" fill="none"
+        stroke="#222" stroke-width="1.5" filter="url(#rough)"/>
+  <line x1="476" y1="197" x2="494" y2="215" stroke="#222" stroke-width="1.2" filter="url(#rough)"/>
+  <line x1="494" y1="197" x2="476" y2="215" stroke="#222" stroke-width="1.2" filter="url(#rough)"/>
 
-  <!-- ── LVT FINISH (6mm) ──────────────────────────────────── -->
-  <rect x="90" y="394" width="560" height="9" fill="#c8934a"
-        stroke="#774400" stroke-width="1" filter="url(#rough)"/>
-  <!-- LVT wood-grain dash marks -->
-  <line x1="105" y1="397" x2="185" y2="397" stroke="#9a6420" stroke-width="0.7" opacity="0.7"/>
-  <line x1="195" y1="397" x2="275" y2="397" stroke="#9a6420" stroke-width="0.7" opacity="0.7"/>
-  <line x1="285" y1="397" x2="365" y2="397" stroke="#9a6420" stroke-width="0.7" opacity="0.7"/>
-  <line x1="375" y1="397" x2="455" y2="397" stroke="#9a6420" stroke-width="0.7" opacity="0.7"/>
-  <line x1="465" y1="397" x2="545" y2="397" stroke="#9a6420" stroke-width="0.7" opacity="0.7"/>
+  <!-- ══════════════════════ OA FLOOR PANEL ══════════════════════ -->
+  <!-- y=506 ~ y=530 -->
+  <path d="M105,506 C250,505 430,507 635,506"
+        stroke="#111" stroke-width="3" fill="none" filter="url(#rough)"/>
+  <path d="M105,530 C250,529 430,531 635,530"
+        stroke="#111" stroke-width="2" fill="none" filter="url(#rough)"/>
+  <path d="M105,506 C105,515 105,524 105,530"
+        stroke="#111" stroke-width="2" fill="none" filter="url(#rough)"/>
+  <path d="M635,506 C635,515 635,524 635,530"
+        stroke="#111" stroke-width="2" fill="none" filter="url(#rough)"/>
+  <!-- Panel joint -->
+  <path d="M370,506 C370,515 370,524 370,530"
+        stroke="#bbb" stroke-width="0.9" stroke-dasharray="5,4" fill="none" filter="url(#rough)"/>
+  <!-- Panel texture line -->
+  <path d="M120,517 C250,516 430,518 620,517"
+        stroke="#bbb" stroke-width="0.6" stroke-dasharray="9,7" fill="none"/>
 
-  <!-- ── FINISH FLOOR LINE ──────────────────────────────────── -->
-  <line x1="55" y1="403" x2="695" y2="403"
-        stroke="#111" stroke-width="2.8" filter="url(#rough)"/>
+  <!-- ══════════════════════ BOND + LVT ══════════════════════ -->
+  <!-- Bond (2mm) -->
+  <path d="M105,530 C250,529 430,531 635,530"
+        stroke="#777" stroke-width="0.8" fill="none" filter="url(#rough)"/>
+  <rect x="105" y="530" width="530" height="4" fill="#c0c0c0" opacity="0.55"/>
+  <!-- LVT (6mm) -->
+  <path d="M105,534 C250,533 430,535 635,534"
+        stroke="#884400" stroke-width="1" fill="none" filter="url(#rough)"/>
+  <rect x="105" y="534" width="530" height="10" fill="#c8934a" opacity="0.65"/>
+  <!-- LVT wood-grain -->
+  <path d="M118,539 C230,538 340,540 450,539" stroke="#8b5a1a" stroke-width="0.8" opacity="0.8" fill="none"/>
+  <path d="M465,539 C540,538 600,540 630,539" stroke="#8b5a1a" stroke-width="0.8" opacity="0.8" fill="none"/>
+  <!-- LVT bottom edge -->
+  <path d="M105,544 C250,543 430,545 635,544"
+        stroke="#884400" stroke-width="1" fill="none" filter="url(#rough)"/>
 
-  <!-- F.L marker (triangle, red) -->
-  <polygon points="355,403 348,391 362,391" fill="#cc0000"/>
-  <text x="366" y="392" font-size="10" fill="#cc0000" font-weight="bold">F.L</text>
+  <!-- ══════════════════════ FINISH FLOOR LINE ══════════════════════ -->
+  <path d="M50,544 C200,543 450,545 710,544"
+        stroke="#111" stroke-width="3.5" fill="none" filter="url(#rough)"/>
 
-  <!-- ── DIMENSION LINES ────────────────────────────────────── -->
+  <!-- CH : VARIES (filled triangle marker — black) -->
+  <polygon points="600,544 591,530 609,530" fill="#222"/>
+  <text x="613" y="534" font-size="10.5" fill="#222" font-weight="bold">CH : VARIES</text>
 
-  <!-- Slab thickness (left) -->
-  <line x1="70" y1="100" x2="70" y2="222"
-        stroke="#cc0000" stroke-width="1.3" filter="url(#rough)"
-        marker-start="url(#arr-red-rev)" marker-end="url(#arr-red)"/>
-  <line x1="70" y1="100" x2="90" y2="100" stroke="#cc0000" stroke-width="1" filter="url(#rough)"/>
-  <line x1="70" y1="222" x2="90" y2="222" stroke="#cc0000" stroke-width="1" filter="url(#rough)"/>
-  <text x="63" y="164" text-anchor="end" font-size="10.5" fill="#cc0000">200</text>
+  <!-- F.L marker (red triangle) -->
+  <polygon points="360,544 352,532 368,532" fill="#cc0000"/>
+  <text x="373" y="533" font-size="10" fill="#cc0000" font-weight="bold">F.L</text>
 
-  <!-- Pedestal height (left of left pedestal) -->
-  <line x1="152" y1="238" x2="152" y2="363"
-        stroke="#cc0000" stroke-width="1.3" filter="url(#rough)"
-        marker-start="url(#arr-red-rev)" marker-end="url(#arr-red)"/>
-  <line x1="152" y1="238" x2="168" y2="238" stroke="#cc0000" stroke-width="1" filter="url(#rough)"/>
-  <line x1="152" y1="363" x2="168" y2="363" stroke="#cc0000" stroke-width="1" filter="url(#rough)"/>
-  <text x="145" y="305" text-anchor="end" font-size="10.5" fill="#cc0000">150</text>
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!--       DIMENSION LINES — ARCHITECTURAL TICK STYLE      -->
+  <!--  Rule: ext lines thin gray, dim line red, tick = 45°  -->
+  <!-- ══════════════════════════════════════════════════════ -->
 
-  <!-- Total raised floor height (right side) -->
-  <line x1="670" y1="222" x2="670" y2="403"
-        stroke="#cc0000" stroke-width="1.3" filter="url(#rough)"
-        marker-start="url(#arr-red-rev)" marker-end="url(#arr-red)"/>
-  <line x1="650" y1="222" x2="678" y2="222" stroke="#cc0000" stroke-width="1" filter="url(#rough)"/>
-  <line x1="650" y1="403" x2="678" y2="403" stroke="#cc0000" stroke-width="1" filter="url(#rough)"/>
-  <text x="680" y="315" font-size="10.5" fill="#cc0000">H=200</text>
+  <!-- ── 1) SLAB THICKNESS 200 (left, x=72) ── -->
+  <!-- extension lines -->
+  <line x1="105" y1="88"  x2="64" y2="88"  stroke="#cc0000" stroke-width="0.7"/>
+  <line x1="105" y1="200" x2="64" y2="200" stroke="#cc0000" stroke-width="0.7"/>
+  <!-- dim line -->
+  <line x1="70" y1="88" x2="70" y2="200" stroke="#cc0000" stroke-width="1"/>
+  <!-- tick marks (45° diagonal) -->
+  <line x1="64" y1="82"  x2="76" y2="94"  stroke="#cc0000" stroke-width="2"/>
+  <line x1="64" y1="194" x2="76" y2="206" stroke="#cc0000" stroke-width="2"/>
+  <!-- number -->
+  <text transform="translate(63,146) rotate(-90)" text-anchor="middle"
+        font-size="11.5" fill="#cc0000">200</text>
 
-  <!-- Panel thickness dim (small) -->
-  <line x1="665" y1="363" x2="665" y2="403"
-        stroke="#2244bb" stroke-width="1" filter="url(#rough)"
-        marker-start="url(#arr-blue-rev)" marker-end="url(#arr-blue)"/>
-  <text x="668" y="385" font-size="9" fill="#2244bb">t=40</text>
+  <!-- ── 2) PEDESTAL HEIGHT 150 (x=138) ── -->
+  <line x1="155" y1="218" x2="128" y2="218" stroke="#cc0000" stroke-width="0.7"/>
+  <line x1="155" y1="506" x2="128" y2="506" stroke="#cc0000" stroke-width="0.7"/>
+  <line x1="134" y1="218" x2="134" y2="506" stroke="#cc0000" stroke-width="1"/>
+  <line x1="128" y1="212" x2="140" y2="224" stroke="#cc0000" stroke-width="2"/>
+  <line x1="128" y1="500" x2="140" y2="512" stroke="#cc0000" stroke-width="2"/>
+  <text transform="translate(127,364) rotate(-90)" text-anchor="middle"
+        font-size="11.5" fill="#cc0000">150</text>
 
-  <!-- ── LEADER LINE ANNOTATIONS ────────────────────────────── -->
+  <!-- ── 3) FINISH LAYERS 40 (right side, x=654) ── -->
+  <line x1="635" y1="506" x2="662" y2="506" stroke="#cc0000" stroke-width="0.7"/>
+  <line x1="635" y1="544" x2="662" y2="544" stroke="#cc0000" stroke-width="0.7"/>
+  <line x1="656" y1="506" x2="656" y2="544" stroke="#cc0000" stroke-width="1"/>
+  <line x1="650" y1="500" x2="662" y2="512" stroke="#cc0000" stroke-width="2"/>
+  <line x1="650" y1="538" x2="662" y2="550" stroke="#cc0000" stroke-width="2"/>
+  <text x="664" y="527" font-size="10.5" fill="#cc0000">t=38</text>
+
+  <!-- ── 4) TOTAL OA FLOOR HEIGHT 200(VAR) (far left, x=44) ── -->
+  <line x1="105" y1="200" x2="36" y2="200" stroke="#cc0000" stroke-width="0.7"/>
+  <line x1="105" y1="544" x2="36" y2="544" stroke="#cc0000" stroke-width="0.7"/>
+  <line x1="42" y1="200" x2="42" y2="544" stroke="#cc0000" stroke-width="1"/>
+  <line x1="36" y1="194" x2="48" y2="206" stroke="#cc0000" stroke-width="2"/>
+  <line x1="36" y1="538" x2="48" y2="550" stroke="#cc0000" stroke-width="2"/>
+  <text transform="translate(35,374) rotate(-90)" text-anchor="middle"
+        font-size="11.5" fill="#cc0000">200(VAR)</text>
+
+  <!-- ── 5) PEDESTAL BASE WIDTH 110 (horizontal, y=580) ── -->
+  <line x1="155" y1="506" x2="155" y2="592" stroke="#cc0000" stroke-width="0.7"/>
+  <line x1="265" y1="506" x2="265" y2="592" stroke="#cc0000" stroke-width="0.7"/>
+  <line x1="155" y1="586" x2="265" y2="586" stroke="#cc0000" stroke-width="1"/>
+  <line x1="149" y1="580" x2="161" y2="592" stroke="#cc0000" stroke-width="2"/>
+  <line x1="259" y1="580" x2="271" y2="592" stroke="#cc0000" stroke-width="2"/>
+  <text x="210" y="604" text-anchor="middle" font-size="11.5" fill="#cc0000">110</text>
+
+  <!-- ── 6) PEDESTAL LEG WIDTH 26 (horizontal, y=630) ── -->
+  <line x1="187" y1="360" x2="187" y2="642" stroke="#cc0000" stroke-width="0.7"/>
+  <line x1="213" y1="360" x2="213" y2="642" stroke="#cc0000" stroke-width="0.7"/>
+  <line x1="187" y1="636" x2="213" y2="636" stroke="#cc0000" stroke-width="1"/>
+  <line x1="181" y1="630" x2="193" y2="642" stroke="#cc0000" stroke-width="2"/>
+  <line x1="207" y1="630" x2="219" y2="642" stroke="#cc0000" stroke-width="2"/>
+  <text x="200" y="654" text-anchor="middle" font-size="11.5" fill="#cc0000">26</text>
+
+  <!-- ══════════════════════ LEADER LINE ANNOTATIONS ══════════════════════ -->
+
+  <!-- □ STL PIPE label (blue, like reference) -->
+  <path d="M214,370 C260,340 310,305 370,285"
+        stroke="#333" stroke-width="0.9" fill="none" filter="url(#rough-sm)"/>
+  <text x="373" y="281" font-size="10.5" fill="#1155cc">□30X30X2.3T STL PIPE</text>
+  <text x="373" y="295" font-size="9.5" fill="#555">(PEDESTAL LEG TUBE)</text>
 
   <!-- RC SLAB -->
-  <line x1="650" y1="155" x2="700" y2="128" stroke="#111" stroke-width="0.9" filter="url(#rough)"/>
-  <circle cx="700" cy="128" r="2.5" fill="#111"/>
-  <text x="703" y="124" font-size="9.5" fill="#111">RC. SLAB</text>
-  <text x="703" y="136" font-size="9.5" fill="#111">THK 200</text>
+  <path d="M560,155 C600,140 630,128 668,118"
+        stroke="#333" stroke-width="0.9" fill="none" filter="url(#rough-sm)"/>
+  <text x="672" y="115" font-size="10" fill="#222">RC. SLAB (THK 200)</text>
 
-  <!-- OA Pedestal (left) -->
-  <line x1="208" y1="310" x2="128" y2="420" stroke="#111" stroke-width="0.9" filter="url(#rough)"/>
-  <circle cx="128" cy="420" r="2.5" fill="#111"/>
-  <text x="30" y="408" font-size="9" fill="#111">O.A FLOOR</text>
-  <text x="30" y="420" font-size="9" fill="#111">PEDESTAL</text>
-  <text x="30" y="432" font-size="9" fill="#111">(H. ADJ TYPE)</text>
+  <!-- OA FLOOR PEDESTAL -->
+  <path d="M228,450 C290,500 350,570 390,620"
+        stroke="#333" stroke-width="0.9" fill="none" filter="url(#rough-sm)"/>
+  <text x="392" y="617" font-size="10" fill="#222">O.A FLOOR PEDESTAL</text>
+  <text x="392" y="630" font-size="9.5" fill="#555">HIGH ADJ. TYPE</text>
 
-  <!-- OA Floor Panel -->
-  <line x1="440" y1="376" x2="580" y2="445" stroke="#111" stroke-width="0.9" filter="url(#rough)"/>
-  <circle cx="580" cy="445" r="2.5" fill="#111"/>
-  <text x="583" y="441" font-size="9.5" fill="#111">O.A FLOOR PANEL</text>
-  <text x="583" y="453" font-size="9.5" fill="#111">(ACCESS FLOOR)</text>
+  <!-- OA FLOOR PANEL -->
+  <path d="M430,518 C500,490 560,472 620,455"
+        stroke="#333" stroke-width="0.9" fill="none" filter="url(#rough-sm)"/>
+  <text x="623" y="452" font-size="10" fill="#222">O.A FLOOR PANEL</text>
+  <text x="623" y="465" font-size="9.5" fill="#555">(ACCESS FLOOR)</text>
 
-  <!-- Bond + LVT -->
-  <line x1="520" y1="397" x2="580" y2="475" stroke="#111" stroke-width="0.9" filter="url(#rough)"/>
-  <circle cx="580" cy="475" r="2.5" fill="#111"/>
-  <text x="583" y="471" font-size="9.5" fill="#111">THK 6mm LVT FIN.</text>
-  <text x="583" y="483" font-size="9.5" fill="#111">THK 2mm BOND</text>
+  <!-- LVT + BOND -->
+  <path d="M540,538 C580,575 615,610 640,650"
+        stroke="#333" stroke-width="0.9" fill="none" filter="url(#rough-sm)"/>
+  <text x="643" y="647" font-size="10" fill="#222">THK. 6mm LVT FIN.</text>
+  <text x="643" y="660" font-size="9.5" fill="#555">THK. 2mm BOND</text>
 
-  <!-- ── MATERIAL NOTES BOX ─────────────────────────────────── -->
-  <rect x="55" y="445" width="310" height="148"
-        fill="rgba(255,255,255,0.6)" stroke="#555" stroke-width="1.2" filter="url(#rough)"/>
-  <text x="210" y="464" text-anchor="middle" font-size="11" font-weight="bold" fill="#222">
-    [ 재 료 마 감 기 준 ]
-  </text>
-  <line x1="65" y1="468" x2="355" y2="468" stroke="#444" stroke-width="0.8" filter="url(#rough)"/>
-  <text x="68" y="483" font-size="9.5" fill="#333">□  RC. SLAB : THK 200mm</text>
-  <text x="68" y="498" font-size="9.5" fill="#333">□  O.A PEDESTAL : H=150 (HIGH ADJ. TYPE)</text>
-  <text x="68" y="513" font-size="9.5" fill="#333">□  O.A FLOOR PANEL (ACCESS FLOOR)</text>
-  <text x="68" y="528" font-size="9.5" fill="#333">□  THK 2mm BOND</text>
-  <text x="68" y="543" font-size="9.5" fill="#333">□  THK 6mm LVT FIN.</text>
-  <text x="68" y="558" font-size="9.5" fill="#333">□  RAISED FLOOR TOTAL H = 200mm</text>
-  <line x1="65" y1="566" x2="355" y2="566" stroke="#444" stroke-width="0.5" filter="url(#rough)"/>
-  <text x="68" y="579" font-size="8.5" fill="#888">※ 현장 여건에 따라 높이 조정 가능</text>
-  <text x="68" y="591" font-size="8.5" fill="#888">※ 시공 전 바닥 레벨 확인 필수</text>
+  <!-- STEEL PLATE base plate -->
+  <path d="M165,209 C130,340 100,560 80,700"
+        stroke="#333" stroke-width="0.9" fill="none" filter="url(#rough-sm)"/>
+  <text x="30" y="712" font-size="9.5" fill="#222">THK. 1.6mm STEEL PLATE</text>
+  <text x="30" y="725" font-size="9.5" fill="#222">/ APP' PAINT FIN.</text>
 
-  <!-- ── NOTICE / REMARKS ────────────────────────────────────── -->
-  <text x="383" y="464" font-size="10" fill="#555">[ NOTE ]</text>
-  <line x1="383" y1="467" x2="690" y2="467" stroke="#999" stroke-width="0.7" filter="url(#rough)"/>
-  <text x="383" y="482" font-size="9" fill="#666">1. 상기 도면은 표준 단면 기준임</text>
-  <text x="383" y="496" font-size="9" fill="#666">2. 실제 시공 시 구조 도면 확인 요망</text>
-  <text x="383" y="510" font-size="9" fill="#666">3. LVT 시공 전 바닥 평활도 확보</text>
-  <text x="383" y="524" font-size="9" fill="#666">4. 페데스탈 앵커 볼트 시공 기준 준수</text>
-  <text x="383" y="538" font-size="9" fill="#666">5. 단열 요구 시 단열재 추가 검토</text>
+  <!-- ══════════════════════ TITLE BLOCK ══════════════════════ -->
+  <path d="M30,860 C250,859 500,861 720,860"
+        stroke="#777" stroke-width="1.2" fill="none" filter="url(#rough-sm)"/>
+  <rect x="22" y="860" width="706" height="58"
+        fill="none" stroke="#777" stroke-width="1" filter="url(#rough-sm)"/>
+  <line x1="310" y1="860" x2="310" y2="918" stroke="#777" stroke-width="0.8"/>
+  <line x1="535" y1="860" x2="535" y2="918" stroke="#777" stroke-width="0.8"/>
+  <line x1="22"  y1="885" x2="728" y2="885" stroke="#777" stroke-width="0.6"/>
 
-  <!-- ── AUXILIARY DETAIL: Pedestal Plan View ─────────────────── -->
-  <rect x="55" y="620" width="300" height="260"
-        fill="rgba(255,255,255,0.5)" stroke="#555" stroke-width="1" filter="url(#rough)"/>
-  <text x="205" y="640" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">
-    [ 페데스탈 상세 / PEDESTAL DETAIL ]
-  </text>
-  <line x1="65" y1="644" x2="345" y2="644" stroke="#666" stroke-width="0.7" filter="url(#rough)"/>
+  <text x="40" y="876" font-size="8" fill="#999">PROJECT</text>
+  <text x="40" y="892" font-size="9.5" fill="#111" font-weight="bold">INTERIOR DETAIL STUDY</text>
+  <text x="40" y="905" font-size="8.5" fill="#555">weekend93</text>
 
-  <!-- Pedestal cross-section enlarged -->
-  <!-- Base plate -->
-  <rect x="130" y="655" width="100" height="18"
-        fill="#dcdcdc" stroke="#222" stroke-width="1.5" filter="url(#rough)"/>
-  <!-- Outer leg -->
-  <rect x="170" y="673" width="20" height="85"
-        fill="#ececec" stroke="#222" stroke-width="1.5" filter="url(#rough)"/>
-  <!-- Inner spindle -->
-  <rect x="175" y="700" width="10" height="45"
-        fill="#e0e0e0" stroke="#555" stroke-width="1" filter="url(#rough)"/>
-  <!-- Threads (enlarged) -->
-  <ellipse cx="180" cy="712" rx="9" ry="5"
-           fill="none" stroke="#333" stroke-width="1.1" filter="url(#rough)"/>
-  <ellipse cx="180" cy="725" rx="9" ry="5"
-           fill="none" stroke="#333" stroke-width="1.1" filter="url(#rough)"/>
-  <ellipse cx="180" cy="738" rx="9" ry="5"
-           fill="none" stroke="#333" stroke-width="1.1" filter="url(#rough)"/>
-  <!-- Top cap -->
-  <rect x="155" y="758" width="50" height="14"
-        fill="#dcdcdc" stroke="#222" stroke-width="1.5" filter="url(#rough)"/>
+  <text x="326" y="876" font-size="8" fill="#999">DRAWING TITLE</text>
+  <text x="326" y="892" font-size="9.5" fill="#111" font-weight="bold">OA 바닥 단면 디테일</text>
+  <text x="326" y="905" font-size="8.5" fill="#555">OA FLOOR SECTION DETAIL</text>
 
-  <!-- Pedestal annotations -->
-  <line x1="230" y1="664" x2="310" y2="660" stroke="#444" stroke-width="0.8" filter="url(#rough)"/>
-  <text x="312" y="658" font-size="8" fill="#333">BASE PLATE</text>
-  <line x1="230" y1="720" x2="310" y2="720" stroke="#444" stroke-width="0.8" filter="url(#rough)"/>
-  <text x="312" y="718" font-size="8" fill="#333">ADJ. SPINDLE</text>
-  <line x1="230" y1="765" x2="310" y2="765" stroke="#444" stroke-width="0.8" filter="url(#rough)"/>
-  <text x="312" y="763" font-size="8" fill="#333">TOP CAP PLATE</text>
-
-  <!-- ── AUXILIARY DETAIL: LVT Finish Enlarged ─────────────── -->
-  <rect x="383" y="620" width="310" height="260"
-        fill="rgba(255,255,255,0.5)" stroke="#555" stroke-width="1" filter="url(#rough)"/>
-  <text x="538" y="640" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">
-    [ 마감층 확대 / FINISH LAYER DETAIL ]
-  </text>
-  <line x1="393" y1="644" x2="683" y2="644" stroke="#666" stroke-width="0.7" filter="url(#rough)"/>
-
-  <!-- Enlarged finish layers -->
-  <!-- OA Panel (top) -->
-  <rect x="400" y="660" width="270" height="40"
-        fill="#f0efe8" stroke="#222" stroke-width="1.5" filter="url(#rough)"/>
-  <text x="535" y="684" text-anchor="middle" font-size="9" fill="#555">O.A FLOOR PANEL</text>
-
-  <!-- Bond -->
-  <rect x="400" y="700" width="270" height="14"
-        fill="#b8b8b8" stroke="#666" stroke-width="1" filter="url(#rough)"/>
-  <text x="535" y="710" text-anchor="middle" font-size="8.5" fill="#333">THK 2mm BOND</text>
-
-  <!-- LVT -->
-  <rect x="400" y="714" width="270" height="28"
-        fill="#c8934a" stroke="#774400" stroke-width="1.2" filter="url(#rough)"/>
-  <!-- LVT grain -->
-  <line x1="410" y1="722" x2="530" y2="722" stroke="#9a6420" stroke-width="0.8" opacity="0.8"/>
-  <line x1="545" y1="722" x2="665" y2="722" stroke="#9a6420" stroke-width="0.8" opacity="0.8"/>
-  <text x="535" y="732" text-anchor="middle" font-size="8.5" fill="#440000">THK 6mm LVT FIN.</text>
-
-  <!-- Finish floor line -->
-  <line x1="393" y1="742" x2="683" y2="742"
-        stroke="#111" stroke-width="2.5" filter="url(#rough)"/>
-
-  <!-- Thickness dimensions (right) -->
-  <line x1="680" y1="660" x2="680" y2="700"
-        stroke="#cc0000" stroke-width="1" filter="url(#rough)"
-        marker-start="url(#arr-red-rev)" marker-end="url(#arr-red)"/>
-  <text x="683" y="683" font-size="8.5" fill="#cc0000">t=40</text>
-
-  <line x1="680" y1="700" x2="680" y2="742"
-        stroke="#cc0000" stroke-width="1" filter="url(#rough)"
-        marker-start="url(#arr-red-rev)" marker-end="url(#arr-red)"/>
-  <text x="683" y="724" font-size="8.5" fill="#cc0000">t=8</text>
-
-  <!-- ── TITLE BLOCK (BOTTOM) ───────────────────────────────── -->
-  <line x1="22" y1="932" x2="728" y2="932" stroke="#555" stroke-width="1.5" filter="url(#rough)"/>
-  <rect x="22" y="932" width="706" height="96"
-        fill="rgba(255,255,255,0.4)" stroke="#555" stroke-width="1.2" filter="url(#rough)"/>
-
-  <!-- Column dividers -->
-  <line x1="310" y1="932" x2="310" y2="1028" stroke="#555" stroke-width="1" filter="url(#rough)"/>
-  <line x1="530" y1="932" x2="530" y2="1028" stroke="#555" stroke-width="1" filter="url(#rough)"/>
-  <!-- Row divider -->
-  <line x1="22" y1="980" x2="728" y2="980" stroke="#555" stroke-width="0.7" filter="url(#rough)"/>
-
-  <!-- Block content: row 1 -->
-  <text x="38" y="950" font-size="8.5" fill="#777">PROJECT</text>
-  <text x="38" y="968" font-size="10.5" fill="#111" font-weight="bold">INTERIOR DETAIL STUDY</text>
-
-  <text x="325" y="950" font-size="8.5" fill="#777">DRAWING TITLE</text>
-  <text x="325" y="968" font-size="10.5" fill="#111" font-weight="bold">OA 바닥 단면 디테일</text>
-
-  <text x="545" y="950" font-size="8.5" fill="#777">DATE</text>
-  <text x="545" y="968" font-size="10.5" fill="#111" font-weight="bold">2026. 04. 11</text>
-
-  <!-- Block content: row 2 -->
-  <text x="38" y="996" font-size="8.5" fill="#777">DRAWN BY</text>
-  <text x="38" y="1014" font-size="10" fill="#111">AUTO GENERATED</text>
-
-  <text x="325" y="996" font-size="8.5" fill="#777">SCALE</text>
-  <text x="325" y="1014" font-size="10" fill="#111">N.T.S.</text>
-
-  <text x="545" y="996" font-size="8.5" fill="#777">SHEET No.</text>
-  <text x="545" y="1014" font-size="10.5" fill="#111" font-weight="bold">W-01 / 52</text>
+  <text x="550" y="876" font-size="8" fill="#999">DATE / SCALE / SHEET</text>
+  <text x="550" y="892" font-size="9.5" fill="#111" font-weight="bold">2026.04.11</text>
+  <text x="550" y="905" font-size="8.5" fill="#555">N.T.S. / W-01 / 52</text>
 
 </svg>
