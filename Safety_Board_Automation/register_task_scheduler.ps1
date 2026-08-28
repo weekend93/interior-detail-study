@@ -4,9 +4,9 @@
 
 $ErrorActionPreference = "Stop"
 
-$pythonCmd = Get-Command python -ErrorAction SilentlyContinue
+$pythonCmd = Get-Command py -ErrorAction SilentlyContinue
 if (-not $pythonCmd) {
-    $pythonCmd = Get-Command py -ErrorAction SilentlyContinue
+    $pythonCmd = Get-Command python -ErrorAction SilentlyContinue
 }
 if (-not $pythonCmd) {
     Write-Host "Python을 찾을 수 없습니다. https://www.python.org 에서 설치 후 다시 실행해 주세요." -ForegroundColor Red
@@ -15,7 +15,8 @@ if (-not $pythonCmd) {
 
 $scriptPath = Join-Path $PSScriptRoot "update_safety_board.py"
 $action = New-ScheduledTaskAction -Execute $pythonCmd.Source -Argument "`"$scriptPath`"" -WorkingDirectory $PSScriptRoot
-$trigger = New-ScheduledTaskTrigger -Daily -At 7:30am
+$startTime = Get-Date -Hour 7 -Minute 30 -Second 0
+$trigger = New-ScheduledTaskTrigger -Daily -At $startTime
 
 Register-ScheduledTask `
     -TaskName "무재해기록판_자동갱신" `
@@ -25,4 +26,4 @@ Register-ScheduledTask `
     -Force
 
 Write-Host "등록 완료: 매일 오전 7:30에 자동 실행됩니다." -ForegroundColor Green
-Write-Host "실행 시간을 바꾸려면 이 스크립트의 -At 7:30am 부분을 수정한 뒤 다시 실행하세요."
+Write-Host "실행 시간을 바꾸려면 이 스크립트의 '-Hour 7 -Minute 30' 부분을 수정한 뒤 다시 실행하세요."
