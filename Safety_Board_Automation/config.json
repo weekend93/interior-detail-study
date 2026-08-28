@@ -1,0 +1,7 @@
+{
+  "template_pptx": "template/AJOU_무재해기록판.pptx",
+  "start_date": "2026-07-08",
+  "output_dir": "desktop",
+  "filename_pattern": "무재해기록판_%Y%m%d.png",
+  "export_scale": 2
+}
