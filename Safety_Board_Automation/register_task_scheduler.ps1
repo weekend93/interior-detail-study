@@ -24,10 +24,16 @@ $action = New-ScheduledTaskAction -Execute $pythonExe -Argument "`"$scriptPath`"
 $startTime = Get-Date -Hour 7 -Minute 30 -Second 0
 $trigger = New-ScheduledTaskTrigger -Daily -At $startTime
 
+# 절전 모드면 깨워서 실행하고, 컴퓨터가 꺼져있어 놓친 경우 켜지자마자 바로 실행하도록
+# 기본으로 켜둔다. (GUI에서 수동으로 체크했던 옵션을 스크립트에 고정해, 다시 등록해도
+# 사라지지 않게 한다.)
+$taskSettings = New-ScheduledTaskSettingsSet -WakeToRun -StartWhenAvailable
+
 Register-ScheduledTask `
     -TaskName "무재해기록판_자동갱신" `
     -Action $action `
     -Trigger $trigger `
+    -Settings $taskSettings `
     -Description "매일 아침 7:30에 무재해 기록판 PPTX의 달성일수/현재 날짜를 갱신하고 이미지를 바탕화면에 저장합니다." `
     -Force
 
