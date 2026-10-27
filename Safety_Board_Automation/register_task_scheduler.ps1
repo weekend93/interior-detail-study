@@ -5,16 +5,22 @@
 $ErrorActionPreference = "Stop"
 
 $pythonCmd = Get-Command py -ErrorAction SilentlyContinue
-if (-not $pythonCmd) {
+if ($pythonCmd) {
+    $pythonExe = "py"
+} else {
     $pythonCmd = Get-Command python -ErrorAction SilentlyContinue
+    $pythonExe = "python"
 }
 if (-not $pythonCmd) {
     Write-Host "Python을 찾을 수 없습니다. https://www.python.org 에서 설치 후 다시 실행해 주세요." -ForegroundColor Red
     exit 1
 }
 
+# 설치 경로를 그대로 박아두면(예: $pythonCmd.Source) 윈도우/파이썬 업데이트로 그 경로가
+# 바뀔 때 등록된 작업이 깨진다. 대신 명령 이름만 저장해, 실행될 때마다 그 시점의 PATH에서
+# 새로 찾도록 한다.
 $scriptPath = Join-Path $PSScriptRoot "update_safety_board.py"
-$action = New-ScheduledTaskAction -Execute $pythonCmd.Source -Argument "`"$scriptPath`"" -WorkingDirectory $PSScriptRoot
+$action = New-ScheduledTaskAction -Execute $pythonExe -Argument "`"$scriptPath`"" -WorkingDirectory $PSScriptRoot
 $startTime = Get-Date -Hour 7 -Minute 30 -Second 0
 $trigger = New-ScheduledTaskTrigger -Daily -At $startTime
 
